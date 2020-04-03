@@ -1,0 +1,8 @@
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    forum_user: ''
+    forum_password: ''
+    forum_url: 'https://lokosdelpro.foroactivo.com/'
+    forum_market_category_name: 'Mercado'
+    market_topic_name: 'CLAUSULAZOS MERCADO VERANO 16T'
