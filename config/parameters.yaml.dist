@@ -6,3 +6,5 @@ parameters:
     forum_url: 'https://lokosdelpro.foroactivo.com/'
     forum_market_category_name: 'Mercado'
     market_topic_name: 'CLAUSULAZOS MERCADO VERANO 16T'
+    first_free_player_topic_name: '1er LIBRE MERCADO VERANO 16T'
+    second_free_player_topic_name: '2o LIBRE MERCADO VERANO 16T'
