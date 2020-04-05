@@ -5,34 +5,18 @@ namespace App\Command;
 use App\Post\Forum;
 use App\Post\Post;
 use App\Post\PostRepository;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-class LokosDelProMarketNewClausulazoCommand extends Command
+class LokosDelProMarketNewClausulazoCommand extends LokosDelProCommand
 {
-    /**
-     * @var Forum
-     */
-    private $forum;
-
-    /**
-     * @var ParameterBagInterface
-     */
-    private $params;
-
     protected static $defaultName = 'lokos-del-pro:market:clausulazo:new';
 
     public function __construct(string $name = null, Forum $forum, ParameterBagInterface $params)
     {
-        parent::__construct($name);
-
-        $this->forum = $forum;
-        $this->params = $params;
+        parent::__construct($name, $forum, $params);
     }
 
     protected function configure()
@@ -43,26 +27,12 @@ class LokosDelProMarketNewClausulazoCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
-        $forum = $this->forum;
-        $crawler = $forum->connect();
-        $errorMessage = $crawler->filter(".msg");
-
-        if ($errorMessage->last() === null) {
-            $io->error("User/Password incorrecto");
-            return false;
-        }
-
-        $io->comment(
-            sprintf(
-                "Connected to forum %s successfully",
-                $forum->getForumUrl()
-            )
-        );
-
+        $forum = $this->connectForum($input, $output);
         $forumName = $this->params->get("forum_market_category_name");
+        $io = new SymfonyStyle($input, $output);
 
         try {
+            $crawler = $forum->getLoggedHomePage();
             $link = $crawler->selectLink($forumName)->link();
             $crawler = $forum->getBrowser()->request($link->getMethod(), $link->getUri());
         } catch (\InvalidArgumentException $ex) {
