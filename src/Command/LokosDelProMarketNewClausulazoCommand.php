@@ -45,7 +45,9 @@ class LokosDelProMarketNewClausulazoCommand extends LokosDelProCommand
         $targetPlayer = $io->ask("Jugador que clausulo");
         $targetPlayerClause = $io->ask("Cláusula del jugador objetivo");
         $targetPlayerSalary = $io->ask("Salario del jugador objetivo");
-        $total = $targetPlayerSalary + $targetPlayerClause;
+        $targetPlayerSalaryFloat = floatval(str_replace(",", ".", $targetPlayerSalary));
+        $targetPlayerClauseFloat = floatval(str_replace(",", ".", $targetPlayerClause));
+        $total = $targetPlayerSalaryFloat + $targetPlayerClauseFloat;
 
         $postMessage =
                         "- EQUIPO: $yourTeam\n"
