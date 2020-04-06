@@ -45,12 +45,12 @@ class LokosDelProMarketNewFreePlayerCommand extends LokosDelProCommand
         $playerOldTeam = $io->ask("Equipo de procedencia");
 
         $postMessage =
-                        "- EQUIPO: $yourTeam"
+                        "- EQUIPO: $yourTeam\n"
                         ."- JUGADOR LIBRE: $player\n"
                         ."- EQUIPO PROCEDENCIA: $playerOldTeam\n"
                         ."- GASTO: 5M\n";
 
-        $confirmation = $io->confirm("Will be post the next text\n $postMessage \n Continue?:");
+        $confirmation = $io->confirm("Will be post the next text\n$postMessage \n Continue?:");
 
         if ($confirmation) {
             $date = new \DateTime($io->ask("Fecha y hora de publicación (Ej." . date("Y-m-d H:i:s") . ")"));
